@@ -58,8 +58,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutButton.setImage(UIImage(named: "exit.png"), for: .normal)
         logoutButton.addTarget(self, action: #selector(self.clickedLogoutButton(sender:)), for: .touchUpInside)
         let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        negativeSpacer.width = -10;
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutButton)
+        negativeSpacer.width = -8;
+        self.navigationItem.rightBarButtonItems = [negativeSpacer, UIBarButtonItem(customView: logoutButton)]
         
         let client = TWTRAPIClient.withCurrentUser()
         var clientError: NSError?
