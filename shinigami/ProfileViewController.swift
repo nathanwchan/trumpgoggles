@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.profileTableView.reloadData()
         }
     }
-    var navigationTitleUILabel = UILabel()
     var profileCellInView: Bool = true
     
     @IBOutlet weak var profileTableView: UITableView!
@@ -46,11 +45,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // remove separator lines between empty rows
         self.profileTableView.tableFooterView = UIView(frame: CGRect.zero)
         
+        DispatchQueue.main.async {
+            let navigationTitleUILabel = UILabel()
+            navigationTitleUILabel.text = "Trump Goggles"
+            navigationTitleUILabel.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
+            navigationTitleUILabel.sizeToFit()
+            self.navigationItem.titleView = navigationTitleUILabel
+            self.navigationItem.titleView?.alpha = 0.0
+        }
+        
         let logoutButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         logoutButton.setImage(UIImage(named: "exit.png"), for: .normal)
         logoutButton.addTarget(self, action: #selector(self.clickedLogoutButton(sender:)), for: .touchUpInside)
         let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        negativeSpacer.width = -6;
+        negativeSpacer.width = -10;
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutButton)
         
         let client = TWTRAPIClient.withCurrentUser()
@@ -75,14 +83,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 firebase.logEvent("serialize_user_error")
                 self.errorOccurred()
                 return
-            }
-            
-            DispatchQueue.main.async {
-                self.navigationItem.titleView = self.navigationTitleUILabel
-                self.navigationTitleUILabel.text = user.name
-                self.navigationTitleUILabel.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
-                self.navigationTitleUILabel.sizeToFit()
-                self.navigationTitleUILabel.alpha = 0.0
             }
             
             let getListEndpoint = "https://api.twitter.com/1.1/lists/show.json?owner_screen_name=\(Constants.publicListsTwitterAccount)&slug=\(Constants.listSlugId)"
@@ -236,12 +236,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func setNavigationBarItemsAlpha(hide: Bool = false) {
         if hide {
             DispatchQueue.main.async {
-                self.navigationTitleUILabel.alpha = 0.0
+                self.navigationItem.titleView?.alpha = 0.0
             }
         } else if self.profileCellInView && !self.showSorryCell {
             let alpha = max(0, min(1, (self.profileTableView.contentOffset.y - 30) / 110))
             DispatchQueue.main.async {
-                self.navigationTitleUILabel.alpha = alpha
+                self.navigationItem.titleView?.alpha = alpha
             }
         }
     }

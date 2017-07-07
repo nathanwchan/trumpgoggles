@@ -15,8 +15,8 @@
 		D803664D1F0F4BC6006F1DFB /* icon_87.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366441F0F4BC6006F1DFB /* icon_87.png */; };
 		D803664E1F0F4BC6006F1DFB /* icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366451F0F4BC6006F1DFB /* icon_120.png */; };
 		D803664F1F0F4BC6006F1DFB /* icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366461F0F4BC6006F1DFB /* icon_180.png */; };
-		D80366501F0F4BC6006F1DFB /* trump goggles_icon 1.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366471F0F4BC6006F1DFB /* trump goggles_icon 1.png */; };
-		D80366511F0F4BC6006F1DFB /* trump goggles_icon 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366481F0F4BC6006F1DFB /* trump goggles_icon 2.png */; };
+		D80366501F0F4BC6006F1DFB /* icon_512_square.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366471F0F4BC6006F1DFB /* icon_512_square.png */; };
+		D80366511F0F4BC6006F1DFB /* icon_512_round.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366481F0F4BC6006F1DFB /* icon_512_round.png */; };
 		D803665A1F0F4BD0006F1DFB /* splash screen_320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366521F0F4BD0006F1DFB /* splash screen_320x480.png */; };
 		D803665B1F0F4BD0006F1DFB /* splash screen_640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366531F0F4BD0006F1DFB /* splash screen_640x960.png */; };
 		D803665C1F0F4BD0006F1DFB /* splash screen_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = D80366541F0F4BD0006F1DFB /* splash screen_640x1136.png */; };
@@ -65,8 +65,8 @@
 		D80366441F0F4BC6006F1DFB /* icon_87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_87.png; path = icons/icon_87.png; sourceTree = "<group>"; };
 		D80366451F0F4BC6006F1DFB /* icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120.png; path = icons/icon_120.png; sourceTree = "<group>"; };
 		D80366461F0F4BC6006F1DFB /* icon_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_180.png; path = icons/icon_180.png; sourceTree = "<group>"; };
-		D80366471F0F4BC6006F1DFB /* trump goggles_icon 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trump goggles_icon 1.png"; path = "icons/trump goggles_icon 1.png"; sourceTree = "<group>"; };
-		D80366481F0F4BC6006F1DFB /* trump goggles_icon 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trump goggles_icon 2.png"; path = "icons/trump goggles_icon 2.png"; sourceTree = "<group>"; };
+		D80366471F0F4BC6006F1DFB /* icon_512_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_512_square.png; path = icons/icon_512_square.png; sourceTree = "<group>"; };
+		D80366481F0F4BC6006F1DFB /* icon_512_round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_512_round.png; path = icons/icon_512_round.png; sourceTree = "<group>"; };
 		D80366521F0F4BD0006F1DFB /* splash screen_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splash screen_320x480.png"; path = "launchScreenImages/splash screen_320x480.png"; sourceTree = "<group>"; };
 		D80366531F0F4BD0006F1DFB /* splash screen_640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splash screen_640x960.png"; path = "launchScreenImages/splash screen_640x960.png"; sourceTree = "<group>"; };
 		D80366541F0F4BD0006F1DFB /* splash screen_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splash screen_640x1136.png"; path = "launchScreenImages/splash screen_640x1136.png"; sourceTree = "<group>"; };
@@ -247,8 +247,8 @@
 				D80366441F0F4BC6006F1DFB /* icon_87.png */,
 				D80366451F0F4BC6006F1DFB /* icon_120.png */,
 				D80366461F0F4BC6006F1DFB /* icon_180.png */,
-				D80366471F0F4BC6006F1DFB /* trump goggles_icon 1.png */,
-				D80366481F0F4BC6006F1DFB /* trump goggles_icon 2.png */,
+				D80366471F0F4BC6006F1DFB /* icon_512_square.png */,
+				D80366481F0F4BC6006F1DFB /* icon_512_round.png */,
 			);
 			name = icons;
 			sourceTree = "<group>";
@@ -352,14 +352,14 @@
 				D835030F1F10205200029F18 /* exit.png in Resources */,
 				D803665A1F0F4BD0006F1DFB /* splash screen_320x480.png in Resources */,
 				D80C459F1EF88C510080B044 /* twitter_eyes_logo.png in Resources */,
-				D80366511F0F4BC6006F1DFB /* trump goggles_icon 2.png in Resources */,
+				D80366511F0F4BC6006F1DFB /* icon_512_round.png in Resources */,
 				D88ADF4C1EFC712D002AF349 /* heart-tab-bar-icon@3x.png in Resources */,
 				D80C459C1EF88C510080B044 /* heart-filled.png in Resources */,
 				D803665B1F0F4BD0006F1DFB /* splash screen_640x960.png in Resources */,
 				D803664D1F0F4BC6006F1DFB /* icon_87.png in Resources */,
 				D80366611F0F4BD0006F1DFB /* splash screen_2048x2732.png in Resources */,
 				D803665E1F0F4BD0006F1DFB /* splash screen_768x1024.png in Resources */,
-				D80366501F0F4BC6006F1DFB /* trump goggles_icon 1.png in Resources */,
+				D80366501F0F4BC6006F1DFB /* icon_512_square.png in Resources */,
 				D803664B1F0F4BC6006F1DFB /* icon_60.png in Resources */,
 				D88ADF4A1EFC712D002AF349 /* heart-tab-bar-icon.png in Resources */,
 				D803664F1F0F4BC6006F1DFB /* icon_180.png in Resources */,
