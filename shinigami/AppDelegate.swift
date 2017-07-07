@@ -9,7 +9,6 @@
 import UIKit
 import TwitterKit
 import Firebase
-import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,33 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             consumerSecret:"ZFPTnraeq0lllFwGZKiPzqsdWxEbGldhHb7BKBSuCKlxFRloKx")
         
         FIRApp.configure()
-        
-        /* START REALM CONFIG */
-        let config = Realm.Configuration(
-            schemaVersion: 6,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 4) {
-                    migration.enumerateObjects(ofType: TWTRList.className()) { oldObject, newObject in
-                        let formatter  = DateFormatter()
-                        formatter.dateFormat = "E MMM d HH:mm:ss Z yyyy"
-                        newObject!["createdAt"] = formatter.date(from: String(describing: oldObject!["createdAt"])) ?? Date()
-                    }
-                }
-                if (oldSchemaVersion < 6) {
-                    migration.enumerateObjects(ofType: TWTRList.className()) { oldObject, newObject in
-                        newObject!["ownerId"] = "0"
-                    }
-                }
-        })
-        
-        // Tell Realm to use this new configuration object for the default Realm
-        Realm.Configuration.defaultConfiguration = config
-        
-        // Now that we've told Realm how to handle the schema change, opening the file
-        // will automatically perform the migration
-        let _ = try! Realm()
-        
-        /* END REALM CONFIG */
         
         return true
     }

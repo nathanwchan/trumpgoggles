@@ -1,0 +1,6 @@
+framework module Pods_trumpgoggles {
+  umbrella header "Pods-trumpgoggles-umbrella.h"
+
+  export *
+  module * { export * }
+}

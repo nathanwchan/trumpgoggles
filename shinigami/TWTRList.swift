@@ -8,22 +8,18 @@
 
 import Foundation
 import SwiftyJSON
-import RealmSwift
 import TwitterKit
 
-class TWTRList: Object {
-    dynamic var ownerId: String = ""
-    dynamic var idStr: String = ""
-    dynamic var name: String = ""
-    dynamic var uri: String = ""
-    dynamic var memberCount: Int = 0
-    dynamic var createdAt: Date?
-    dynamic var user: TWTRUserCustom?
+class TWTRList {
+    var idStr: String = ""
+    var name: String = ""
+    var uri: String = ""
+    var memberCount: Int = 0
+    var createdAt: Date?
+    var user: TWTRUserCustom?
     
-    convenience init?(json: JSON, user: TWTRUserCustom?) {
-        self.init()
+    init?(json: JSON, user: TWTRUserCustom?) {
         guard
-            let ownerId = Twitter.sharedInstance().sessionStore.session()?.userID,
             let idStr = json["id_str"].string,
             let name = json["name"].string,
             let uri = json["uri"].string,
@@ -36,16 +32,11 @@ class TWTRList: Object {
         let formatter  = DateFormatter()
         formatter.dateFormat = "E MMM d HH:mm:ss Z yyyy"
         
-        self.ownerId = ownerId
         self.idStr = idStr
         self.name = name
         self.uri = uri
         self.memberCount = memberCount
         self.createdAt = formatter.date(from: createdAtStr) ?? Date()
         self.user = user
-    }
-    
-    override static func primaryKey() -> String? {
-        return "idStr"
     }
 }

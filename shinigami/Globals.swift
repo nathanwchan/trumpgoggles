@@ -13,6 +13,8 @@ struct Constants {
     static let launchCountUserDefaultsKey = "launchCount"
     static let lastStoreReviewLaunchCountUserDefaultsKey = "lastStoreReviewLaunchCount"
     static let publicListsTwitterAccount = "Tw1tterEyes"
+    static var listSlugId = "tweetsee-realdonaldtrump"
+    static var screenName = "realDonaldTrump"
 }
 
 struct Globals {

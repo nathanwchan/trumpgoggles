@@ -8,23 +8,21 @@
 
 import Foundation
 import SwiftyJSON
-import RealmSwift
 
-class TWTRUserCustom: Object {
-    dynamic var idStr: String = ""
-    dynamic var name: String = ""
-    dynamic var screenName: String = ""
-    dynamic var location: String = ""
-    dynamic var userDescription: String = ""
-    dynamic var followersCount: Int = 0 // unused
-    dynamic var followingCount: Int = 0 // friends_count
-    dynamic var isVerified: Bool = false
-    dynamic var profileImageNormalSizeUrl: String = ""
-    dynamic var profileImageOriginalSizeUrl: String = ""
-    dynamic var following: Bool = false // is the logged-in user following this user?
+class TWTRUserCustom {
+    var idStr: String = ""
+    var name: String = ""
+    var screenName: String = ""
+    var location: String = ""
+    var userDescription: String = ""
+    var followersCount: Int = 0 // unused
+    var followingCount: Int = 0 // friends_count
+    var isVerified: Bool = false
+    var profileImageNormalSizeUrl: String = ""
+    var profileImageOriginalSizeUrl: String = ""
+    var following: Bool = false // is the logged-in user following this user?
     
-    convenience init?(json: JSON) {
-        self.init()
+    init?(json: JSON) {
         guard
             let idStr = json["id_str"].string,
             let name = json["name"].string,
@@ -34,8 +32,7 @@ class TWTRUserCustom: Object {
             let followersCount = json["followers_count"].int,
             let followingCount = json["friends_count"].int,
             let isVerified = json["verified"].bool,
-            let profileImageNormalSizeUrl = json["profile_image_url_https"].string,
-            let following = json["following"].bool
+            let profileImageNormalSizeUrl = json["profile_image_url_https"].string
         else {
             return nil
         }
@@ -50,10 +47,5 @@ class TWTRUserCustom: Object {
         self.isVerified = isVerified
         self.profileImageNormalSizeUrl = profileImageNormalSizeUrl
         self.profileImageOriginalSizeUrl = profileImageNormalSizeUrl.replacingOccurrences(of: "_normal", with: "")
-        self.following = following
-    }
-    
-    override static func primaryKey() -> String? {
-        return "idStr"
     }
 }
