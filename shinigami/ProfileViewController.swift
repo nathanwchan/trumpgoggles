@@ -30,6 +30,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     var profileCellInView: Bool = true
+    var refreshControlEnabled: Bool = false
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh tweets")
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
+        return refreshControl
+    }()
     
     @IBOutlet weak var profileTableView: UITableView!
     
@@ -103,7 +111,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func retrieveAndRenderListTweets() {
+    func retrieveAndRenderListTweets(refresh: Bool = false) {
         guard let list = self.list else {
             print("Error: something went wrong serializing list")
             firebase.logEvent("serialize_list_error")
@@ -119,14 +127,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         var params = [
             "count": "50"
         ]
-        if let oldestTweet = self.tweets.last {
-            if let tweetID = Int(oldestTweet.tweetID) {
-                params["max_id"] = String(describing: tweetID - 1)
-            } else {
-                params["max_id"] = oldestTweet.tweetID
+        if !refresh {
+            if let oldestTweet = self.tweets.last {
+                if let tweetID = Int(oldestTweet.tweetID) {
+                    params["max_id"] = String(describing: tweetID - 1)
+                } else {
+                    params["max_id"] = oldestTweet.tweetID
+                }
+                // attempt to prompt store review when loading more tweets
+                attemptPromptStoreReview()
             }
-            // attempt to prompt store review when loading more tweets
-            attemptPromptStoreReview()
         }
         let client = TWTRAPIClient.withCurrentUser()
         var clientError: NSError?
@@ -141,10 +151,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             let jsonData = JSON(data: data)
-            self.tweets.append(contentsOf: TWTRTweet.tweets(withJSONArray: jsonData.arrayObject) as! [TWTRTweet])
+            let newTweets = TWTRTweet.tweets(withJSONArray: jsonData.arrayObject) as! [TWTRTweet]
             self.showSpinnerCell = false
-            self.profileTableView.reloadData()
+            let when = DispatchTime.now() + 1 // intentionally delay by 1 second for better UX
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                if refresh {
+                    self.tweets = newTweets
+                } else {
+                    self.tweets.append(contentsOf: newTweets)
+                }
+                self.profileTableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
+    }
+    
+    func handleRefresh(_: Any?) {
+        firebase.logEvent("refresh_tweets")
+        self.retrieveAndRenderListTweets(refresh: true)
     }
     
     func clickedLogoutButton(sender: Any?) {
@@ -248,6 +272,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.setNavigationBarItemsAlpha()
+        
+        if !refreshControlEnabled && !self.profileCellInView {
+            // only enable the refresh control once the user has scrolled down a little bit
+            DispatchQueue.main.async {
+                self.profileTableView.addSubview(self.refreshControl)
+                self.refreshControlEnabled = true
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -258,7 +290,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.row == 0 && self.user != nil {
             self.profileCellInView = true
         }
-        if indexPath.row == self.tweets.count - 1 {
+        if indexPath.row == self.tweets.count - 3 {
             firebase.logEvent("profile_load_more_tweets")
             self.retrieveAndRenderListTweets()
         }
