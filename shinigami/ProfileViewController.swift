@@ -171,6 +171,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.retrieveAndRenderListTweets(refresh: true)
     }
     
+    func clickedInfoButton(sender: Any?) {
+        firebase.logEvent("clicked_info")
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "InfoModalSegue", sender: nil)
+        }
+    }
+    
     func clickedLogoutButton(sender: Any?) {
         let alertController = UIAlertController(title: "Logout?", message: "Are you sure you want to logout of your Twitter account?", preferredStyle: .alert)
         let logoutAction = UIAlertAction(title: "Yes", style: .default) { (result : UIAlertAction) -> Void in
@@ -292,6 +299,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         if indexPath.row == self.tweets.count - 3 {
             firebase.logEvent("profile_load_more_tweets")
+            
+            if self.navigationItem.leftBarButtonItems == nil {
+                let infoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+                infoButton.setImage(UIImage(named: "info.png"), for: .normal)
+                infoButton.addTarget(self, action: #selector(self.clickedInfoButton(sender:)), for: .touchUpInside)
+                let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+                negativeSpacer.width = -4;
+                self.navigationItem.leftBarButtonItems = [negativeSpacer, UIBarButtonItem(customView: infoButton)]
+            }
+            
             self.retrieveAndRenderListTweets()
         }
     }

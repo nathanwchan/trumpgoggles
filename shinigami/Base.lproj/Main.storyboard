@@ -247,11 +247,77 @@ Please try again later!</string>
                     <connections>
                         <outlet property="profileTableView" destination="o54-TA-NFf" id="Key-JI-Cbb"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="LogoutSegue" id="RcK-0r-9DW"/>
+                        <segue destination="wwz-X3-N2v" kind="presentation" identifier="InfoModalSegue" id="lTu-Cg-G2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsO-cV-FAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5476" y="-367"/>
+        </scene>
+        <!--Info Modal View Controller-->
+        <scene sceneID="Xlt-4k-b7o">
+            <objects>
+                <viewController id="wwz-X3-N2v" customClass="InfoModalViewController" customModule="trumpgoggles" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M62-sV-Lfy"/>
+                        <viewControllerLayoutGuide type="bottom" id="hlp-rW-Zu2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NZf-nP-EQe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tweetsee-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="jhx-5I-2fv">
+                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="2hP-Fq-6KA"/>
+                                    <constraint firstAttribute="width" constant="120" id="erN-d5-sJd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX0-lQ-tlE">
+                                <rect key="frame" x="63" y="155" width="249" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="6wV-7B-YkY"/>
+                                    <constraint firstAttribute="width" constant="249" id="IMt-zn-3GS"/>
+                                </constraints>
+                                <string key="text">Enjoying Trump Goggles?
+See what ANYONE on Twitter sees with the Tweetsee app!</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYW-EL-zZl">
+                                <rect key="frame" x="337" y="28" width="30" height="30"/>
+                                <state key="normal" image="x.png"/>
+                                <connections>
+                                    <action selector="closeModal:" destination="wwz-X3-N2v" eventType="touchUpInside" id="Fqa-dr-UsA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to see it in the App Store" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSU-kO-QBm">
+                                <rect key="frame" x="63.5" y="401" width="249" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249" id="ej5-Xt-KFx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hYW-EL-zZl" firstAttribute="top" secondItem="M62-sV-Lfy" secondAttribute="bottom" constant="8" id="KkB-cb-393"/>
+                            <constraint firstItem="jSU-kO-QBm" firstAttribute="top" secondItem="jhx-5I-2fv" secondAttribute="bottom" constant="7.5" id="Noa-ba-ccC"/>
+                            <constraint firstItem="jhx-5I-2fv" firstAttribute="centerY" secondItem="NZf-nP-EQe" secondAttribute="centerY" id="Tft-cu-rpV"/>
+                            <constraint firstItem="jSU-kO-QBm" firstAttribute="centerX" secondItem="NZf-nP-EQe" secondAttribute="centerX" id="YQc-pi-SWI"/>
+                            <constraint firstItem="jhx-5I-2fv" firstAttribute="centerX" secondItem="NZf-nP-EQe" secondAttribute="centerX" id="dcC-7g-6DQ"/>
+                            <constraint firstItem="aX0-lQ-tlE" firstAttribute="centerX" secondItem="NZf-nP-EQe" secondAttribute="centerX" id="eIo-EZ-S6P"/>
+                            <constraint firstItem="jhx-5I-2fv" firstAttribute="top" secondItem="aX0-lQ-tlE" secondAttribute="bottom" constant="26.5" id="qGl-Lq-UcQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hYW-EL-zZl" secondAttribute="trailing" constant="-8" id="tnm-Hh-YVc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6UB-lH-k7O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6531.5" y="-367.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qcv-rq-4j9">
@@ -274,6 +340,8 @@ Please try again later!</string>
     </scenes>
     <resources>
         <image name="login-screen.png" width="750" height="1334"/>
+        <image name="tweetsee-icon.png" width="120" height="120"/>
         <image name="twitter-verified-icon.png" width="15" height="15"/>
+        <image name="x.png" width="30" height="30"/>
     </resources>
 </document>
